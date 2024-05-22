@@ -4,8 +4,13 @@ import viteLogo from "/vite.svg";
 import Filter from "./Components/Filter";
 import Search from "./Components/Search";
 import TodoList from "./Components/TodoList";
+import DateTimePicker from 'react-datetime-picker';
+
+
 
 function App() {
+
+  // const [value, onChange] = useState<Value>(new Date());
 
   const [todos, setTodos] = useState([
     { id: 0, task: "Arrange books alphabetically", status: "Active" },
@@ -19,6 +24,12 @@ function App() {
   const addTodo = (data) => {
     setTodos( [ ...todos, data={...data, id:parseInt(todos[todos.length-1].id) + 1, status:"Active"}] )
     console.log(data)
+  }
+  const fetchtodos = async ()=>{
+    const response = await fetch("http://127.0.0.1:8000/admin")
+    const data = await response.json()
+
+    setTodos(data)
   }
 
   // delete function
@@ -63,7 +74,9 @@ function App() {
       <Search addTodo = { addTodo } />
       <Filter filter_todo = { filterTodo }/>
       <TodoList todos = { todos } delTodo = { delTodo } update_todo = { updateTodo } complete_todo = { completeTodo } filter_todo = { filterTodo } />
+      {/* <DateTimePicker onChange={onChange} value={value} /> */}
     </div>
+    
   );
 }
 
