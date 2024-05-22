@@ -3,8 +3,9 @@ from . import views
 
 
 urlpatterns = [
-    path("todos", views.todo_list),
-    path("todos/<int:pk>", views.todo_detail)
+    path("", views.todo_list),
+    path("<int:pk>/", views.todo_detail),
+    #create endpoint
 ]
 
 
